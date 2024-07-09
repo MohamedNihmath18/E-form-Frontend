@@ -75,8 +75,9 @@ const Form = () => {
 
     return (
         <div className="form-container">
-            <img src="./assets/mahsa-logo.png" alt="Company Symbol" />
-            <h1 className="form-header">Mahsa Specialist Hospital</h1>
+            {/* <img src="./assets/mahsa-logo.png" alt="Company Symbol" /> */}
+            <img src="https://www.mahsahospital.com/wp-content/uploads/2019/11/mahsa-logo.png"/>
+            {/* <h1 className="form-header">Mahsa Specialist Hospital</h1> */}
             <h2 className="form-title">Access Rights Requisition</h2>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
@@ -151,7 +152,7 @@ const Form = () => {
                     <select name="approvedBy.email" value={formData.approvedBy.email} onChange={onChange} required>
                         <option value="">Select person</option>
                         <option value="mn1788@srmist.edu.in">Nikmat</option>
-                        <option value="person2@example.com">Person 2</option>
+                        <option value="gladsonkalangiam@gmail.com">Person 2</option>
                         {/* Add more options as needed */}
                     </select>
                 </div>
