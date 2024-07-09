@@ -76,7 +76,7 @@ const Form = () => {
     return (
         <div className="form-container">
             {/* <img src="./assets/mahsa-logo.png" alt="Company Symbol" /> */}
-            <img src="https://www.mahsahospital.com/wp-content/uploads/2019/11/mahsa-logo.png"/>
+            <center><img src="https://www.mahsahospital.com/wp-content/uploads/2019/11/mahsa-logo.png"/></center>
             {/* <h1 className="form-header">Mahsa Specialist Hospital</h1> */}
             <h2 className="form-title">Access Rights Requisition</h2>
             <form onSubmit={onSubmit}>
