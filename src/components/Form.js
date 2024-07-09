@@ -83,11 +83,11 @@ const Form = () => {
                 <div className="form-group">
                     <label>
                         <input type="checkbox" name="new" checked={formData.accessRights.new} onChange={onChange} /> New
-                    </label>
-                    <label>
+                    
+                     
                         <input type="checkbox" name="change" checked={formData.accessRights.change} onChange={onChange} /> Change
-                    </label>
-                    <label>
+                     
+                    
                         <input type="checkbox" name="blockInactive" checked={formData.accessRights.blockInactive} onChange={onChange} /> Block/Inactive
                     </label>
                 </div>
@@ -116,7 +116,7 @@ const Form = () => {
                         <tr>
                             <th>No</th>
                             <th>ID Creation</th>
-                            <th>Yes</th>
+                            <th>Yes/No</th>
                             <th>Remark</th>
                         </tr>
                     </thead>
@@ -127,6 +127,7 @@ const Form = () => {
                                 <td>{item.idCreation}</td>
                                 <td>
                                     <input type="checkbox" checked={item.yes} onChange={e => onIdCreationChange(index, 'yes', e.target.checked)} />
+                                    {/* <input type="checkbox" checked={item.no} onChange={e => onIdCreationChange(index, 'no', e.target.checked)} /> */}
                                 </td>
                                 <td>
                                     <input type="text" value={item.remark} onChange={e => onIdCreationChange(index, 'remark', e.target.value)} />
