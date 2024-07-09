@@ -26,7 +26,7 @@ const ApprovalForm = () => {
 
     const onApprove = async () => {
         try {
-            const res = await axios.post(`http://localhost:5000/api/forms/${id}/approve`, formData);
+            const res = await axios.put(`http://localhost:5000/api/forms/${id}/approve`, formData);
             console.log(res.data);
             navigate('/');
         } catch (err) {
@@ -36,7 +36,7 @@ const ApprovalForm = () => {
 
     const onReject = async () => {
         try {
-            const res = await axios.post(`http://localhost:5000/api/forms/${id}/reject`, formData);
+            const res = await axios.put(`http://localhost:5000/api/forms/${id}/reject`, formData);
             console.log(res.data);
             navigate('/');
         } catch (err) {
