@@ -12,10 +12,10 @@ const Form = () => {
         department: '',
         accessRights: { new: false, change: false, blockInactive: false },
         idCreation: [
-            { no: 1, idCreation: 'Healthcare Information System', yes: false, remark: '' },
-            { no: 2, idCreation: 'Outlook', yes: false, remark: '' },
-            { no: 3, idCreation: 'Domain', yes: false, remark: '' },
-            { no: 4, idCreation: 'VPN', yes: false, remark: '' },
+            { id: 1, name: 'Healthcare Information System', yes: false, no: false, remark: '' },
+            { id: 2, name: 'Outlook', yes: false, no: false, remark: '' },
+            { id: 3, name: 'Domain', yes: false, no: false, remark: '' },
+            { id: 4, name: 'VPN', yes: false, no: false, remark: '' },
         ],
         remarks: '',
         requestedBy: { name: '', email: '' },
@@ -75,20 +75,33 @@ const Form = () => {
 
     return (
         <div className="form-container">
-            {/* <img src="./assets/mahsa-logo.png" alt="Company Symbol" /> */}
-            <center><img src="https://www.mahsahospital.com/wp-content/uploads/2019/11/mahsa-logo.png"/></center>
-            {/* <h1 className="form-header">Mahsa Specialist Hospital</h1> */}
+            <center><img src="https://www.mahsahospital.com/wp-content/uploads/2019/11/mahsa-logo.png" alt="Company Symbol" /></center>
             <h2 className="form-title">Access Rights Requisition</h2>
             <form onSubmit={onSubmit}>
-                <div className="form-group">
-                    <label>
-                        <input type="checkbox" name="new" checked={formData.accessRights.new} onChange={onChange} /> New
-                    
-                     
-                        <input type="checkbox" name="change" checked={formData.accessRights.change} onChange={onChange} /> Change
-                     
-                    
-                        <input type="checkbox" name="blockInactive" checked={formData.accessRights.blockInactive} onChange={onChange} /> Block/Inactive
+                <div className="form-checkbox-group">
+                    <label className="checkbox-label">
+                        <input
+                            type="checkbox"
+                            name="new"
+                            checked={formData.accessRights.new}
+                            onChange={onChange}
+                        /> New
+                    </label>
+                    <label className="checkbox-label">
+                        <input
+                            type="checkbox"
+                            name="change"
+                            checked={formData.accessRights.change}
+                            onChange={onChange}
+                        /> Change
+                    </label>
+                    <label className="checkbox-label">
+                        <input
+                            type="checkbox"
+                            name="blockInactive"
+                            checked={formData.accessRights.blockInactive}
+                            onChange={onChange}
+                        /> Block/Inactive
                     </label>
                 </div>
                 <div className="form-group">
@@ -116,28 +129,46 @@ const Form = () => {
                         <tr>
                             <th>No</th>
                             <th>ID Creation</th>
-                            <th>Yes/No</th>
+                            <th>Yes</th>
+                            <th>No</th>
                             <th>Remark</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {formData.idCreation.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.no}</td>
-                                <td>{item.idCreation}</td>
+                        {formData.idCreation.map(item => (
+                            <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
                                 <td>
-                                    <input type="checkbox" checked={item.yes} onChange={e => onIdCreationChange(index, 'yes', e.target.checked)} />
-                                    {/* <input type="checkbox" checked={item.no} onChange={e => onIdCreationChange(index, 'no', e.target.checked)} /> */}
+                                    <input
+                                        type="checkbox"
+                                        name={`yes_${item.id}`}
+                                        checked={item.yes}
+                                        onChange={e => onIdCreationChange(item.id - 1, 'yes', e.target.checked)}
+                                    />
                                 </td>
                                 <td>
-                                    <input type="text" value={item.remark} onChange={e => onIdCreationChange(index, 'remark', e.target.value)} />
+                                    <input
+                                        type="checkbox"
+                                        name={`no_${item.id}`}
+                                        checked={item.no}
+                                        onChange={e => onIdCreationChange(item.id - 1, 'no', e.target.checked)}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        name={`remark_${item.id}`}
+                                        value={item.remark}
+                                        onChange={e => onIdCreationChange(item.id - 1, 'remark', e.target.value)}
+                                    />
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
                 <div className="form-group">
-                    <label>Remarks:</label>
+                    <label>Remarks (for IT Department):</label>
                     <textarea name="remarks" value={formData.remarks} onChange={onChange} required />
                 </div>
                 <div className="form-group">

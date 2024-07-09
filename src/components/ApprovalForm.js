@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../App.css'; // Correct path for CSS import
 
 const ApprovalForm = () => {
     const { id } = useParams();
@@ -97,7 +96,7 @@ const ApprovalForm = () => {
                     {idCreation.map((item, index) => (
                         <tr key={index}>
                             <td>{item.no}</td>
-                            <td>{item.idCreation}</td>
+                            <td>{item.idCreation+1}</td>
                             <td>{item.yes ? 'Yes' : 'No'}</td>
                             <td>{item.remark}</td>
                         </tr>
