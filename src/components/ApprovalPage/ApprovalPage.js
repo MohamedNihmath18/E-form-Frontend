@@ -31,7 +31,7 @@ const ApprovalPage = ({ match }) => {
 
   return (
     <div className="approval-page">
-      <img src="/assets/mahsa-logo.png" alt="Mahsa Specialist Hospital" />
+      <img src="https://www.mahsahospital.com/wp-content/uploads/2019/11/mahsa-logo.png" alt="Mahsa Specialist Hospital" />
       <h1>Access Rights Requisition</h1>
       <div>
         <label>Name:</label>
