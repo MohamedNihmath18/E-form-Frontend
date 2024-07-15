@@ -53,6 +53,22 @@ const ApprovalPage = ({ match }) => {
         <label>Department:</label>
         <span>{formData.department}</span>
       </div>
+      
+      <div className="checkbox-group">
+        <label>
+          <input type="checkbox" checked={formData.accessRights.new} disabled />
+          New
+        </label>
+        <label>
+          <input type="checkbox" checked={formData.accessRights.change} disabled />
+          Change
+        </label>
+        <label>
+          <input type="checkbox" checked={formData.accessRights.blockInactive} disabled />
+          Block/Inactive
+        </label>
+      </div>
+
       <table>
         <thead>
           <tr>
