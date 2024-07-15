@@ -7,7 +7,7 @@ const ApprovalPage = ({ match }) => {
   useEffect(() => {
     // Fetch form data based on the ID from the URL (match.params.id)
     // Assuming you have an API endpoint to get the form data by ID
-    fetch(`/api/forms/${match.params.id}`)
+    fetch(`https://e-form-backend-1.onrender.com/api/forms/${match.params.id}`)
       .then(response => response.json())
       .then(data => setFormData(data))
       .catch(error => console.error('Error fetching form data:', error));

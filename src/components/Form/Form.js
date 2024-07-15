@@ -43,7 +43,7 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('/api/forms', {
+        fetch('https://e-form-backend-1.onrender.com/api/forms', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
