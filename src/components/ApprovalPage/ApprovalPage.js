@@ -1,79 +1,115 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ApprovalPage.css';
 
 const ApprovalPage = () => {
-    const { id } = useParams();
-    const [formData, setFormData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const { id } = useParams();
+  const [formData, setFormData] = useState(null);
 
-    useEffect(() => {
-        const fetchForm = async () => {
-            try {
-                const response = await fetch(`https://e-form-backend-1.onrender.com/api/forms/${id}`);
-                if (!response.ok) {
-                    throw new Error('Form not found');
-                }
-                const data = await response.json();
-                setFormData(data);
-                setLoading(false);
-            } catch (err) {
-                setError(err.message);
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    // Fetch form data based on the ID from the URL
+    fetch(`https://e-form-backend-1.onrender.com/api/forms/${id}`)
+      .then(response => response.json())
+      .then(data => setFormData(data))
+      .catch(error => console.error('Error fetching form data:', error));
+  }, [id]);
 
-        fetchForm();
-    }, [id]);
+  const handleApprove = () => {
+    // Handle approval logic here
+    console.log('Form approved');
+    // Optionally, send approval status to the server
+  };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+  const handleReject = () => {
+    // Handle rejection logic here
+    console.log('Form rejected');
+    // Optionally, send rejection status to the server
+  };
 
-    if (error) {
-        return <div>{error}</div>;
-    }
+  if (!formData) {
+    return <div>Loading...</div>;
+  }
 
-    return (
-        <div className="approval-page">
-            <h1>Approval Form</h1>
-            {formData && (
-                <div>
-                    <p>Name: {formData.name}</p>
-                    <p>Designation: {formData.designation}</p>
-                    <p>Effective Date: {formData.effectiveDate}</p>
-                    <p>Effective Until: {formData.effectiveUntil}</p>
-                    <p>Department: {formData.department}</p>
-                    <p>Remarks: {formData.remarks}</p>
-                    <p>Requested By: {formData.requestedByName} ({formData.requestedByEmail})</p>
-                    <button onClick={() => handleApproval('approved')}>Approve</button>
-                    <button onClick={() => handleApproval('rejected')}>Reject</button>
-                </div>
-            )}
-        </div>
-    );
-};
+  return (
+    <div className="approval-page">
+      <img src="https://www.mahsahospital.com/wp-content/uploads/2019/11/mahsa-logo.png" alt="Mahsa Specialist Hospital" />
+      <h1>Access Rights Requisition</h1>
+      <div>
+        <label>Name:</label>
+        <span>{formData.name}</span>
+      </div>
+      <div>
+        <label>Designation:</label>
+        <span>{formData.designation}</span>
+      </div>
+      <div>
+        <label>Effective Date:</label>
+        <span>{formData.effectiveDate}</span>
+      </div>
+      <div>
+        <label>Effective Until:</label>
+        <span>{formData.effectiveUntil}</span>
+      </div>
+      <div>
+        <label>Department:</label>
+        <span>{formData.department}</span>
+      </div>
+      
+      <div className="checkbox-group">
+        <label>
+          <input type="checkbox" checked={formData.accessRights.new} disabled />
+          New
+        </label>
+        <label>
+          <input type="checkbox" checked={formData.accessRights.change} disabled />
+          Change
+        </label>
+        <label>
+          <input type="checkbox" checked={formData.accessRights.blockInactive} disabled />
+          Block/Inactive
+        </label>
+      </div>
 
-const handleApproval = async (status) => {
-    try {
-        const response = await fetch(`https://e-form-backend-1.onrender.com/api/forms/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ status }),
-        });
-
-        if (!response.ok) {
-            throw new Error('Error updating form status');
-        }
-
-        const result = await response.json();
-        console.log('Form status updated:', result);
-    } catch (err) {
-        console.error('Error:', err);
-    }
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>ID Creation</th>
+            <th>Yes</th>
+            <th>No</th>
+            <th>Remark</th>
+          </tr>
+        </thead>
+        <tbody>
+          {formData.idCreation.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{item.name}</td>
+              <td>{item.yes ? 'Yes' : ''}</td>
+              <td>{item.no ? 'No' : ''}</td>
+              <td>{item.remark}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div>
+        <label>Remarks (for IT Department):</label>
+        <span>{formData.remarks}</span>
+      </div>
+      <div>
+        <label>Requested By (Name):</label>
+        <span>{formData.requestedByName}</span>
+      </div>
+      <div>
+        <label>Requested By (Email):</label>
+        <span>{formData.requestedByEmail}</span>
+      </div>
+      <div className="button-group">
+        <button onClick={handleApprove}>Approve</button>
+        <button onClick={handleReject}>Reject</button>
+      </div>
+    </div>
+  );
 };
 
 export default ApprovalPage;
