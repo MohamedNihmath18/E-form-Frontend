@@ -13,14 +13,28 @@ const ApprovalPage = () => {
       .catch(error => console.error('Error fetching form data:', error));
   }, [id]);
 
+  const updateFormStatus = (status) => {
+    fetch(`https://e-form-backend-1.onrender.com/api/forms/${id}/status`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(`Form ${status}`);
+        alert(`Form ${status}`);
+      })
+      .catch(error => console.error('Error updating form status:', error));
+  };
+
   const handleApprove = () => {
-    console.log('Form approved');
-    // Optionally, send approval status to the server
+    updateFormStatus('approved');
   };
 
   const handleReject = () => {
-    console.log('Form rejected');
-    // Optionally, send rejection status to the server
+    updateFormStatus('rejected');
   };
 
   if (!formData) {
