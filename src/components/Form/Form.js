@@ -25,6 +25,12 @@ const Form = () => {
         approverEmail: ''
     });
 
+    const approverEmails = [
+        'approver1@example.com',
+        'approver2@example.com',
+        'approver3@example.com'
+    ];
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -164,7 +170,12 @@ const Form = () => {
             </div>
             <div className="form-group">
                 <label>Approver Email:</label>
-                <input type="email" name="approverEmail" value={formData.approverEmail} onChange={handleChange} />
+                <select name="approverEmail" value={formData.approverEmail} onChange={handleChange}>
+                    <option value="">Select Approver</option>
+                    {approverEmails.map(email => (
+                        <option key={email} value={email}>{email}</option>
+                    ))}
+                </select>
             </div>
             <button type="submit">Get Approve</button>
         </form>
