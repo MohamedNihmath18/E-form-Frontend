@@ -26,9 +26,9 @@ const Form = () => {
     });
 
     const approverEmails = [
-        'approver1@example.com',
-        'approver2@example.com',
-        'approver3@example.com'
+        'mn1788@srmist.edu.in',
+        'irwansuli.orange@gmail.com',
+        'atielave15@gmail.com'
     ];
 
     const handleChange = (e) => {
