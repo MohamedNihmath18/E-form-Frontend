@@ -26,7 +26,7 @@ const Form = () => {
     });
 
     const approverEmails = [
-        'mn1788@srmist.edu.in',
+        'mohamednihmath13@gmail.com',
         'irwansuli.orange@gmail.com',
         'atielave15@gmail.com'
     ];
