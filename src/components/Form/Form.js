@@ -26,7 +26,7 @@ const Form = () => {
     });
 
     const approverEmails = [
-        'mn1788@srmist.edu.in',
+        'mohamednihmath13@gmail.com',
         'irwansuli.orange@gmail.com',
         'atielave15@gmail.com'
     ];
@@ -49,7 +49,7 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('https://e-form-backend-1.onrender.com/api/forms', {
+        fetch('http://localhost:5000/api/forms', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
